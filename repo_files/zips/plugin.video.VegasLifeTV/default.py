@@ -12,6 +12,7 @@ def CAT():
 	addDir('VegasLifeTV',base+'/vegaslifetv/albums',1,icon,fanart,'')
 	addDir('VegasLifeTV Live','http://xvegaslifetvx.api.channel.livestream.com/3.0/playlist.m3u8',4,icon,fanart,'')
 	addDir('Asian Culture TV Live','http://xasianculturetvx.api.channel.livestream.com/3.0/playlist.m3u8',4,icon,fanart,'')
+	addDir('Asian Culture TV Live 2','yhw-Fgh-as4',4,icon,fanart,'')
 def INDEX(url):
 	open = OPEN_URL(url)
 	all = regex_get_all(open,'div class="thumbnail_wrapper">','srcset=')
@@ -49,6 +50,8 @@ def RESOLVE(url):
 	xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, liz)
 	
 def Live(url):
+	if not url.startswith('http'):
+		url = 'plugin://plugin.video.youtube/play/?video_id=%s'%(url)
 	liz = xbmcgui.ListItem(name, iconImage='DefaultVideo.png', thumbnailImage=iconimage)
 	liz.setInfo(type='Video', infoLabels={'Title': name, 'Plot': description})
 	liz.setProperty('IsPlayable','true')
